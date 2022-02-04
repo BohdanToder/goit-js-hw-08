@@ -6,7 +6,7 @@ const textareaRef = document.querySelector('.feedback-form textarea');
 
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 
-const formData = {};
+const formData = {  email: '', message: '' }
 
 populateOutput();
 
@@ -19,15 +19,13 @@ function onFormInput(event) {
 }
 
 function populateOutput() {
-    const savedData = localStorage.getItem(LOCALSTORAGE_KEY);
+    const savedData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
     if (savedData) {
-        if (JSON.parse(savedData).email) {
-        emailInputRef.value = JSON.parse(savedData).email;
-        }
+            formData.email = savedData.email;
+            emailInputRef.value = savedData.email;
 
-        if (JSON.parse(savedData).message) {
-            textareaRef.value = JSON.parse(savedData).message;
-        }
+            formData.message = savedData.message;
+            textareaRef.value = savedData.message;
     }
 }
 
